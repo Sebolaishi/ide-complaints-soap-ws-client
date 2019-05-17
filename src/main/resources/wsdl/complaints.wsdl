@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.anylytical.com/schema/ide/complaints" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://www.anylytical.com/schema/ide/complaints" targetNamespace="http://www.anylytical.com/schema/ide/complaints">
+  <wsdl:types>
+    <xsd:schema xmlns:at-ide-complaints="http://www.anylytical.com/schema/ide/complaints" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.anylytical.com/schema/ide/complaints" version="1">
+
+	<xs:annotation>
+		<xs:documentation>
+			Anylytical Insurance Data Exchange Complaints Domain Schema
+		</xs:documentation>
+	</xs:annotation>
+	
+<!--	Complaints Details	-->
+	<xsd:complexType name="Complaint">
+		<xsd:sequence>
+			<xsd:element name="complaintsDetails" type="at-ide-complaints:ComplaintDetails_Type"/>
+			<xsd:element name="complaintsManagement" type="at-ide-complaints:ComplaintsManagement_Type"/>
+			<xsd:element name="settlementPayment" type="at-ide-complaints:Payment_Type"/>
+			<xsd:element name="policyHolderDetails" type="at-ide-complaints:PolicyHolderDetails_Type"/>
+			<xsd:element name="complaintPaymentType" type="at-ide-complaints:ComplaintAmount_Type"/>
+			<xsd:element name="complaintDecisionStatus" type="at-ide-complaints:ComplaintDecisionStatus_Type"/>
+			<xsd:element name="complaintEventLogStatus" type="at-ide-complaints:ComplaintEventLogStatus_Type"/>
+			<xsd:element name="complaintProcessStatus" type="at-ide-complaints:ComplaintProcessStatus_Type"/>
+			<xsd:element name="complaintItemQuestion" type="at-ide-complaints:ComplaintItemQuestion_Type"/>
+			<xsd:element name="complaintOccurrenceQuestion" type="at-ide-complaints:ComplaintOccurrenceQuestion_Type"/>
+			<xsd:element name="complaintReason" type="at-ide-complaints:ComplaintReason_Type"/>
+			<xsd:element name="complaintTransactionAmount" type="at-ide-complaints:ComplaintTransactionAmount_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+<!--	Complaints Details	-->
+	<xsd:complexType name="ComplaintDetails_Type">
+		<xsd:sequence>
+			<xsd:element name="complaintReferences" type="xsd:string"/>
+			<xsd:element name="complaintDateTime" type="xsd:dateTime"/>
+			<xsd:element minOccurs="0" name="dateFinalized" type="xsd:dateTime"/>
+			<xsd:element name="schemeReferences" type="xsd:string"/>
+			<xsd:element name="insurer" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+<!--	Complaints management Type	-->
+	<xsd:complexType name="ComplaintsManagement_Type">
+		<xsd:sequence>
+			<xsd:element name="complaintDefinition" type="xsd:string"/>
+			<xsd:element name="complaintManagementFramework" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+<!--	Payment Type -->
+	<xsd:complexType name="Payment_Type">
+		<xsd:sequence>
+			<xsd:element name="complaintSettlementEstimate" type="xsd:double"/>
+			<xsd:element name="complaintGoodwillPayment" type="xsd:double"/>
+			<xsd:element name="compensationPayment" type="xsd:double"/>
+		</xsd:sequence>
+	</xsd:complexType>
+<!--	Policy Details Type -->
+	<xsd:complexType name="PolicyHolderDetails_Type">
+		<xsd:sequence>
+			<xsd:element name="firstName" type="xsd:string"/>
+			<xsd:element name="middleName" type="xsd:string"/>
+			<xsd:element name="surname" type="xsd:string"/>
+			<xsd:element name="policyNumber" type="xsd:string"/>
+			<xsd:element name="contact" type="at-ide-complaints:Contact_Type"/>
+			<xsd:element name="address" type="at-ide-complaints:Address_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+<!--	Contact electronic details Type -->
+	<xsd:complexType name="Contact_Type">
+		<xsd:sequence>
+			<xsd:element name="cellphone" type="xsd:string"/>
+			<xsd:element name="telephone" type="xsd:string"/>
+			<xsd:element name="emailAddress" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+<!--	Address Info Type -->
+	<xsd:complexType name="Address_Type">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="PostalAddress" type="at-ide-complaints:PostalAddress_Type"/>
+				<xsd:element name="PhysicalAddress" type="at-ide-complaints:PhysicalAddress_Type"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PostalAddress_Type">
+		<xsd:sequence>
+			<xsd:element name="AddressLine1" type="xsd:string"/>
+			<xsd:element name="Suburb" type="xsd:string"/>
+			<xsd:element name="City" type="xsd:string"/>
+			<xsd:element name="Province" type="xsd:string"/>
+			<xsd:element name="PostalCode" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PhysicalAddress_Type">
+		<xsd:sequence>
+			<xsd:element name="streetAddress"/>
+			<xsd:element name="suburb"/>
+			<xsd:element name="city"/>
+			<xsd:element name="province"/>
+			<xsd:element name="postalCode"/>
+		</xsd:sequence>
+	</xsd:complexType>
+<!--	Complaints Amounts Type -->
+	<xsd:simpleType name="ComplaintAmount_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Total"/>
+			<xsd:enumeration value="Fee"/>
+			<xsd:enumeration value="Expense"/>
+			<xsd:enumeration value="Salvage"/>
+			<xsd:enumeration value="Excess"/>
+			<xsd:enumeration value="OwnDamage"/>
+			<xsd:enumeration value="ThirdParty"/>
+			<xsd:enumeration value="Adjustment"/>
+			<xsd:enumeration value="AdjustmentExpense"/>
+			<xsd:enumeration value="Countermand"/>
+			<xsd:enumeration value="FinalPayment"/>
+			<xsd:enumeration value="Indemnity"/>
+			<xsd:enumeration value="LossReserve"/>
+			<xsd:enumeration value="SalvageSubrogationRecovery"/>
+			<xsd:enumeration value="StopPayment"/>
+			<xsd:enumeration value="Transferred"/>
+			<xsd:enumeration value="VoidedCheckDraft"/>
+			<xsd:enumeration value="Payment"/>
+			<xsd:enumeration value="Recover"/>
+			<xsd:enumeration value="Gross"/>
+			<xsd:enumeration value="Offset"/>
+			<xsd:enumeration value="Tax"/>
+			<xsd:enumeration value="Net"/>
+			<xsd:enumeration value="AmountToBePaid"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+<!--	Complaint Decision Status Type -->
+	<xsd:simpleType name="ComplaintDecisionStatus_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Rejected"/>
+			<xsd:enumeration value="Upheld"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+<!--	Complaint Event Log Type -->
+	<xsd:simpleType name="ComplaintEventLogStatus_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Open"/>
+			<xsd:enumeration value="ReOpen"/>
+			<xsd:enumeration value="Final"/>
+			<xsd:enumeration value="FinalRecoveryOutstanding"/>
+			<xsd:enumeration value="FinalSalvageOutstanding"/>
+			<xsd:enumeration value="FinalRecoveryAndSalvageOutstanding"/>
+			<xsd:enumeration value="NotTakenUp"/>
+			<xsd:enumeration value="Outstanding"/>
+			<xsd:enumeration value="ThirdParty"/>
+			<xsd:enumeration value="Closed"/>
+			<xsd:enumeration value="Summarised"/>
+			<xsd:enumeration value="Received"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+<!--	Complaint Process Status Type -->
+	<xsd:simpleType name="ComplaintProcessStatus_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Declined"/>
+			<xsd:enumeration value="Closed"/>
+			<xsd:enumeration value="Open"/>
+			<xsd:enumeration value="Reopened"/>
+			<xsd:enumeration value="NotTakenUp"/>
+			<xsd:enumeration value="Final"/>
+			<xsd:enumeration value="FinalRecoveryAndSalvageOutstanding"/>
+			<xsd:enumeration value="FinalRecoveryOutstanding"/>
+			<xsd:enumeration value="FinalSalvageOutstanding"/>
+			<xsd:enumeration value="Outstanding"/>
+			<xsd:enumeration value="Summarised"/>
+			<xsd:enumeration value="ThirdParty"/>
+			<xsd:enumeration value="New"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+<!--	Complaint Questions Type -->
+	<xsd:simpleType name="ComplaintItemQuestion_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ComplaintItem001"/>
+			<xsd:enumeration value="ComplaintItem002"/>
+			<xsd:enumeration value="ComplaintItem004"/>
+			<xsd:enumeration value="ComplaintItem005"/>
+			<xsd:enumeration value="ComplaintItem008"/>
+			<xsd:enumeration value="ComplaintItem009"/>
+			<xsd:enumeration value="ComplaintItem011"/>
+			<xsd:enumeration value="ComplaintItem013"/>
+			<xsd:enumeration value="ComplaintItem006"/>
+			<xsd:enumeration value="ComplaintItem014"/>
+			<xsd:enumeration value="ComplaintItem015"/>
+			<xsd:enumeration value="ComplaintItem016"/>
+			<xsd:enumeration value="ComplaintItem017"/>
+			<xsd:enumeration value="ComplaintItem018"/>
+			<xsd:enumeration value="ComplaintItem019"/>
+			<xsd:enumeration value="ComplaintItem020"/>
+			<xsd:enumeration value="ComplaintItem021"/>
+			<xsd:enumeration value="ComplaintItem022"/>
+			<xsd:enumeration value="ComplaintItem023"/>
+			<xsd:enumeration value="ComplaintItem024"/>
+			<xsd:enumeration value="ComplaintItem025"/>
+			<xsd:enumeration value="ComplaintItem026"/>
+			<xsd:enumeration value="ComplaintItem027"/>
+			<xsd:enumeration value="ComplaintItem028"/>
+			<xsd:enumeration value="ComplaintItem029"/>
+			<xsd:enumeration value="ComplaintItem030"/>
+			<xsd:enumeration value="ComplaintItem031"/>
+			<xsd:enumeration value="ComplaintItem032"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+<!--	Complaint Occurrence Questions Type -->
+	<xsd:simpleType name="ComplaintOccurrenceQuestion_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ComplaintOccurrence001"/>
+			<xsd:enumeration value="ComplaintOccurrence002"/>
+			<xsd:enumeration value="ComplaintOccurrence003"/>
+			<xsd:enumeration value="ComplaintOccurrence005"/>
+			<xsd:enumeration value="ComplaintOccurrence006"/>
+			<xsd:enumeration value="ComplaintOccurrence007"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+<!--	Complaint Policy Performance Type -->
+	<xsd:simpleType name="ComplaintReason_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PolicyPerformance"/>
+			<xsd:enumeration value="MaturityValues"/>
+			<xsd:enumeration value="PaidUpValues"/>
+			<xsd:enumeration value="PartialPayment"/>
+			<xsd:enumeration value="CreditRetrenchmentInsurance"/>
+			<xsd:enumeration value="PoorService"/>
+			<xsd:enumeration value="DenialOfClaim"/>
+			<xsd:enumeration value="Fraud"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+<!--	Complaint Transaction Amount Type -->
+	<xsd:simpleType name="ComplaintTransactionAmount_Type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Gross"/>
+			<xsd:enumeration value="OriginalEstimate"/>
+			<xsd:enumeration value="Incurred"/>
+			<xsd:enumeration value="OutstandingReserve"/>
+			<xsd:enumeration value="Payment"/>
+			<xsd:enumeration value="Recovery"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+	<xsd:complexType name="ComplaintLodgingRequest">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="complaints" type="at-ide-complaints:Complaint"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ComplaintLodgingResponse">
+		<xsd:sequence>
+			<xsd:element name="receiptNumber" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:element name="complaintLodgingRequest" type="at-ide-complaints:ComplaintLodgingRequest"/>
+	<xsd:element name="complaintLodgingResponse" type="at-ide-complaints:ComplaintLodgingResponse"/>
+	<xsd:element name="complaint" type="at-ide-complaints:Complaint"/>
+
+	
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="complaintLodgingRequest">
+    <wsdl:part element="tns:complaintLodgingRequest" name="complaintLodgingRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="complaintLodgingResponse">
+    <wsdl:part element="tns:complaintLodgingResponse" name="complaintLodgingResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ComplaintsPort">
+    <wsdl:operation name="complaintLodging">
+      <wsdl:input message="tns:complaintLodgingRequest" name="complaintLodgingRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:complaintLodgingResponse" name="complaintLodgingResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ComplaintsPortSoap12" type="tns:ComplaintsPort">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="complaintLodging">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="complaintLodgingRequest">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="complaintLodgingResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ComplaintsPortSoap11" type="tns:ComplaintsPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="complaintLodging">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="complaintLodgingRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="complaintLodgingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IDEComplaints">
+    <wsdl:port binding="tns:ComplaintsPortSoap11" name="ComplaintsPortSoap11">
+      <soap:address location="http://localhost:8080/ide/complaints/ws"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:ComplaintsPortSoap12" name="ComplaintsPortSoap12">
+      <soap12:address location="http://localhost:8080/ide/complaints/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
