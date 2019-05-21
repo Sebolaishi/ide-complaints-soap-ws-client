@@ -1,0 +1,20 @@
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+    <env:Header/>
+    <env:Body>
+        <env:Fault>
+            <env:Code>
+                <env:Value>env:Sender</env:Value>
+            </env:Code>
+            <env:Reason>
+                <env:Text xml:lang="en">Validation error</env:Text>
+            </env:Reason>
+            <env:Detail>
+                <spring-ws:ValidationError xmlns:spring-ws="http://springframework.org/spring-ws">
+                    cvc-complex-type.2.4.a: Invalid content was found starting with element
+                    '{"http://www.anylytical.com/schema/ide/complaints":complaintDecisionStatus}'. One of
+                    '{"http://www.anylytical.com/schema/ide/complaints":complaintsDetails}' is expected.
+                </spring-ws:ValidationError>
+            </env:Detail>
+        </env:Fault>
+    </env:Body>
+</env:Envelope>

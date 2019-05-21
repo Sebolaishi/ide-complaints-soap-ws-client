@@ -1,6 +1,7 @@
 package com.anylytical.ide.complaints.ws.soap.client.test;
 
 import com.anylytical.ide.complaints.soap.ws.client.Application;
+import com.anylytical.ide.complaints.soap.ws.client.SoapClientInterceptors;
 import com.anylytical.ide.complaints.soap.ws.client.WSSoapClient;
 import com.anylytical.ide.complaints.soap.ws.client.persistence.domain.Complaint;
 import com.anylytical.ide.complaints.soap.ws.client.persistence.domain.ComplaintDecisionStatusType;
@@ -14,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 import org.springframework.ws.client.core.SourceExtractor;
+import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.test.server.MockWebServiceClient;
 import org.springframework.xml.transform.StringResult;
 import org.springframework.xml.transform.StringSource;
@@ -154,14 +157,12 @@ public class WSSoapClientTest {
 //    }
 
 
-//    @Test
-//    public void unmarshalRequestTest() throws JAXBException {
-//
-//
-//        ComplaintLodgingRequest complaintLodgingRequest = (ComplaintLodgingRequest) jaxb2Marshaller.unmarshal(new StringSource(complaintsXMl3));
-//
-//        assertNotNull(complaintLodgingRequest);
-//    }
+    @Test
+    public void handleRequestTest() throws JAXBException {
+
+        SoapClientInterceptors handleRequest = new SoapClientInterceptors();
+
+    }
 
     @Test
     public void successfulRequestTest() throws JAXBException {
@@ -176,6 +177,7 @@ public class WSSoapClientTest {
         assertNotNull(complaintLodgingResponse);
 
         assertNotNull(complaintLodgingResponse.getReceiptNumber());
+
 
     }
 
